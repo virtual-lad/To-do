@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    {% if user.is_authenticated %}
+        <header>
+            <a href="add_task">Create a new Task</a>
+
+            <a href="{% url 'accounts:password_change' %}">Change Password</a>
+
+            <a href="{% url 'accounts:logout_view' %}">Logout</a>
+        </header>
+
+        <h1>Wellcome back {{ username }}!</h1>
+
+        <ul>
+            {% for task in tasks %}
+                <li>
+                    <a href="{% url 'index:task_details' task.id %}">{{ task.title }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+
+    {% else %}
+        <h1>Wellcome Newbie!</h1>
+
+        <a href="login">Login</a>
+        <a href="signup">Create new Account</a>
+
+    {% endif %}
+</body>
+</html>
